@@ -4,12 +4,14 @@ from flask import Response
 import requests
 import os
 
+app = Flask(__name__)
+
 TOKEN = os.environ.get("API_TOKEN")
 TOKEN = os.environ.get("PORT")
-if __name__ == '__main__':
+if __name__ == '__name__':
       app.run(host='0.0.0.0', port=PORT)
 
-app = Flask(__name__)
+
 
 def tel_parse_message(message):
     print("message-->",message)
