@@ -3,16 +3,13 @@ from flask import request
 from flask import Response
 import requests
 import os
+from dotenv import load_dotenv
 
+load_dotenv()
+TOKEN = os.getenv('TOKEN')
+ 
 app = Flask(__name__)
-
-TOKEN = os.environ.get("API_TOKEN")
-TOKEN = os.environ.get("PORT")
-if __name__ == '__name__':
-      app.run(host='0.0.0.0', port=80)
-
-
-
+ 
 def tel_parse_message(message):
     print("message-->",message)
     try:
@@ -20,11 +17,11 @@ def tel_parse_message(message):
         txt = message['message']['text']
         print("chat_id-->", chat_id)
         print("txt-->", txt)
-
+ 
         return chat_id,txt
     except:
         print("NO text found-->>")
-
+ 
 def tel_send_message(chat_id, text):
     url = f'https://api.telegram.org/bot{TOKEN}/sendMessage'
     payload = {
