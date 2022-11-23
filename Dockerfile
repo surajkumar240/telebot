@@ -7,3 +7,4 @@ ADD . /app
 WORKDIR /app
 
 CMD python /app/bot.py
+CMD ["-p","5555:4444"]
