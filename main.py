@@ -7,7 +7,8 @@ from dotenv import load_dotenv
 
 load_dotenv()
 TOKEN = os.getenv('TOKEN')
- 
+PORT = os.getenv('PORT')
+
 app = Flask(__name__)
  
 def tel_parse_message(message):
@@ -65,4 +66,4 @@ def index():
         return "<h1>Welcome!</h1>"
  
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=201)
+    app.run(host='0.0.0.0', port={PORT})
