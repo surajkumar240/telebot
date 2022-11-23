@@ -9,7 +9,7 @@ app = Flask(__name__)
 TOKEN = os.environ.get("API_TOKEN")
 TOKEN = os.environ.get("PORT")
 if __name__ == '__name__':
-      app.run(host='0.0.0.0', port=PORT)
+      app.run(host='0.0.0.0', port=80)
 
 
 
