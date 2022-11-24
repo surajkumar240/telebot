@@ -1,2 +1,4 @@
+pyTelegramBotAPI
+urllib3
 python-dotenv
-python-telegram-bot
+requests
