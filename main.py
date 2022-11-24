@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 load_dotenv()
 TOKEN = os.getenv('TOKEN')
 
-print("Bot started....")
+print("Bot started...")
 
 
 def start_command(update, context):
