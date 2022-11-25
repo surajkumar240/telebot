@@ -100,7 +100,7 @@ def pass_gen(message):
     maxlen = message.text
     answer = requests.get(f'https://passwordinator.herokuapp.com/?len={maxlen}&char=true&num=true&caps=true')
     finpass = json.loads(answer.text)['data']
-    bot.send_message(message.chat.id, f"Password: {finpass}")
+    bot.send_message(message.chat.id, f"Password: `{finpass}`", parse_mode="Markdown")
 
 @bot.message_handler(func=lambda message: True)
 def echo_all(message):
