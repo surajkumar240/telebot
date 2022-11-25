@@ -80,7 +80,7 @@ def url_step(message):
 
 @bot.message_handler(commands=['qrgen'])
 def qrmsg(message):
-    qrurl = bot.reply_to(message, 'Enter url')
+    qrurl = bot.reply_to(message, 'Enter URL')
     bot.register_next_step_handler(qrurl, qrimage)
 
 
