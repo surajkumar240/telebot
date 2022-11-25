@@ -86,7 +86,7 @@ def qrmsg(message):
 
 def qrimage(message):
     qrlink = message.text
-    image_url = f'https://api.qrserver.com/v1/create-qr-code/?size=300x300&data={qrlink}'
+    image_url = f'https://api.qrserver.com/v1/create-qr-code/?data={qrlink}&size=300x300&format=png'
     bot.send_photo(message.chat.id, image_url)
     bot.send_message(message.chat.id, f"QR generated successfully for {qrlink}")
 
