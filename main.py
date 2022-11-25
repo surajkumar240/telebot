@@ -8,7 +8,7 @@ from telebot import *
 load_dotenv()
 bot = telebot.TeleBot(os.getenv("TOKEN"))
 
-print("Bot Started..........")
+print("Bot Started........")
 
 # joke start
 jokeurl = "https://official-joke-api.appspot.com/random_joke"
