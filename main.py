@@ -80,7 +80,7 @@ def url_step(message):
 
 @bot.message_handler(commands=['qrgen'])
 def qrmsg(message):
-    qrurl = bot.reply_to(message, 'Enter URL')
+    qrurl = bot.reply_to(message, 'Enter url')
     bot.register_next_step_handler(qrurl, qrimage)
 
 
@@ -90,6 +90,17 @@ def qrimage(message):
     bot.send_photo(message.chat.id, image_url)
     bot.send_message(message.chat.id, f"QR generated successfully for {qrlink}")
 
+@bot.message_handler(commands=['passwordgen'])
+def passmsg(message):
+    passlen = bot.reply_to(message, 'Enter max length')
+    bot.register_next_step_handler(passlen, pass_gen)
+
+
+def pass_gen(message):
+    maxlen = message.text
+    answer = requests.get(f'https://passwordinator.herokuapp.com/?len={maxlen}&char=true&num=true&caps=true')
+    finpass = json.loads(answer.text)['data']
+    bot.send_message(message.chat.id, f"Password: {finpass}")
 
 @bot.message_handler(func=lambda message: True)
 def echo_all(message):
