@@ -90,25 +90,32 @@ def passmsg(message):
 def pass_gen(message):
     maxlen = message.text
 
-    answer = requests.get(f'https://api.happi.dev/v1/generate-password?apikey={happikey}&limit=1&length={maxlen}&num=1&upper=1&symbols=1')
+    answer = requests.get(
+        f'https://api.happi.dev/v1/generate-password?apikey={happikey}&limit=1&length={maxlen}&num=1&upper=1&symbols=1')
     finpass = json.loads(answer.text)['passwords']
     bot.send_message(message.chat.id, f"Password: `{finpass}`", parse_mode="Markdown")
+
 
 @bot.message_handler(commands=['weather'])
 def weathermsg(message):
     cityname = bot.reply_to(message, 'Enter city name')
     bot.register_next_step_handler(cityname, weather_gen)
 
+
 def weather_gen(message):
     cityn = message.text
-    WTOKEN = os.getenv("WTOKEN")
-    answer = requests.get(f'https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/{cityn}?unitGroup=metric&key={WTOKEN}&contentType=json')
+    wtoken = os.getenv("WTOKEN")
+    answer = requests.get(
+        f'https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/{cityn}?unitGroup=metric&key={wtoken}&contentType=json')
     cityl = json.loads(answer.text)['resolvedAddress']
     maxtemp = json.loads(answer.text)['days'][0]['tempmax']
     mintemp = json.loads(answer.text)['days'][0]['tempmin']
     winds = json.loads(answer.text)['days'][0]['windspeed']
     humidity = json.loads(answer.text)['days'][0]['humidity']
-    bot.send_message(message.chat.id, f"<b>Region:</b> {cityl} \n<b>Maximum Temperature:</b> {maxtemp}°C \n<b>Minimum Temperature:</b> {mintemp}°C \n<b>Windspeed:</b> {winds} km/h \n<b>Humidity:</b> {humidity}%", parse_mode="HTML")
+    bot.send_message(message.chat.id,
+                     f"<b>Region:</b> {cityl} \n<b>Maximum Temperature:</b> {maxtemp}°C \n<b>Minimum Temperature:</b> {mintemp}°C \n<b>Windspeed:</b> {winds} km/h \n<b>Humidity:</b> {humidity}%",
+                     parse_mode="HTML")
+
 
 @bot.message_handler(func=lambda message: True)
 def echo_all(message):
