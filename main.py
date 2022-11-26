@@ -55,18 +55,6 @@ def msg4(message):
     bot.send_photo(message.chat.id, url)
 
 
-@bot.message_handler(commands=['about'])
-def numbermsg(message):
-    msg = bot.reply_to(message, 'Enter Number')
-    bot.register_next_step_handler(msg, number_step)
-
-
-def number_step(message):
-    num = message.text
-    answer = requests.get(f'http://numbersapi.com/{num}?json')
-    bot.send_message(message.chat.id, json.loads(answer.text)['text'])
-
-
 @bot.message_handler(commands=['urlshorten'])
 def urlmsg(message):
     longurl = bot.reply_to(message, 'Enter url')
@@ -89,8 +77,8 @@ def qrmsg(message):
 def qrimage(message):
     qrlink = message.text
     image_url = f'https://api.qrserver.com/v1/create-qr-code/?size=300x300&data={qrlink}&format=png'
-    bot.send_photo(message.chat.id, image_url)
-    bot.send_message(message.chat.id, f"QR generated successfully for {qrlink}")
+    ct = f'Successfully generated QR for {qrlink}'
+    bot.send_photo(message.chat.id, image_url, caption={ct})
 
 
 @bot.message_handler(commands=['passwordgen'])
