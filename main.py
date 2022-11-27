@@ -44,7 +44,7 @@ def send_joke(message):
 
 
 def get_url():
-    contents = requests.get('https://meme-api.herokuapp.com/gimme').json()
+    contents = requests.get('https://api.thesurajkumar.tk/getmeme').json()
     image_url = contents['url']
     return image_url
 
